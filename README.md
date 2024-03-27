@@ -1,7 +1,12 @@
-# Vue 3 + Vite
+# Plum Bucket
+Небольшой интернет-магазин по продаже смартфонов, планшетов и ноутбуков.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Зачем все это?
+Чтобы попробовать свои силы в работе с Vue Router :) Слышал о маршрутизаторе, но толком ничего не мог сделать.
+Сейчас умею настраивать маршруты, собирать пропсы из динамических маршрутов, использовать программную навигацию.
+Надеюсь по мере работы над этим небольшим проектом, освою еще несколько фишек Vue Router.
 
-## Recommended IDE Setup
+## Были ли проблемы?
+Да, проблемы встречались, но, к счастью, большинство удалось побороть
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+1. Очень неудобно передавать пропсы между компонентами. Приходится использовать стор или provide + inject (последнее старался минимизировать)
