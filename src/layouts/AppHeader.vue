@@ -33,8 +33,8 @@ const goodsCategories = reactive([
 
 .app-header {
   margin: 0;
-  background-color: $plum-main;
-  color: $white-text;
+  background-color: $plum-all-main;
+  color: $white-text-main;
   font-size: 18px;
   font-weight: 700;
 }
@@ -50,7 +50,7 @@ const goodsCategories = reactive([
     position: relative;
 
     &:hover {
-      background-color: $plum-hover;
+      background-color: $plum-all-hover;
     }
 
     &--active::before {
@@ -60,7 +60,7 @@ const goodsCategories = reactive([
       bottom: 0;
       width: 100%;
       height: 5px;
-      background-color: $white-text;
+      background-color: $white-text-main;
     }
   }
 

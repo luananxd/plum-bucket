@@ -81,14 +81,14 @@ watch(() => route.params.category, (newValue) => {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: $gray-back;
-    box-shadow: 0 0 3px $black-shadow;
+    background-color: $gray-background-main;
+    @include first-black-normal;
   }
 
   &__image {
     height: 235px;
     object-fit: contain;
-    background-color: #ffffff;
+    background-color: $white-background-main;
   }
 
   &__info {
@@ -137,8 +137,8 @@ watch(() => route.params.category, (newValue) => {
   &__chips {
     display: inline-block;
     padding: 3px 5px;
-    background-color: #f04155;
-    color: $white-text;
+    background-color: $red-chips-main;
+    color: $white-text-main;
     font-size: 12px;
     border-radius: 10px;
   }
@@ -146,14 +146,14 @@ watch(() => route.params.category, (newValue) => {
 
 .button {
   padding: 5px 10px;
-  background-color: $plum-main;
-  color: $white-text;
+  background-color: $plum-all-main;
+  color: $white-text-main;
   font-size: 14px;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: $plum-hover;
+    background-color: $plum-all-hover;
   }
 }
 </style>

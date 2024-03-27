@@ -83,7 +83,7 @@ provide('currentGood', currentGood);
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
-    background-color: $gray-back;
+    background-color: $gray-background-main;
   }
 
   &__title {
@@ -92,7 +92,7 @@ provide('currentGood', currentGood);
   }
 
   &__image {
-    box-shadow: 0 0 3px $black-shadow;
+    @include first-black-normal;
   }
 
   &__order {
@@ -119,13 +119,13 @@ provide('currentGood', currentGood);
 
     & dt {
       padding: 5px 0;
-      border-bottom: 2px solid $light-gray-text;
+      border-bottom: 2px solid $lightGray-text-aside;
     }
 
     & dd {
       margin: 0;
       padding: 5px 0;
-      color: $plum-main;
+      color: $plum-all-main;
       font-weight: 700;
     }
   }
@@ -133,14 +133,14 @@ provide('currentGood', currentGood);
 
 .button {
   padding: 5px 10px;
-  background-color: $plum-main;
-  color: $white-text;
+  background-color: $plum-all-main;
+  color: $white-text-main;
   font-size: 18px;
   border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: $plum-hover;
+    background-color: $plum-all-hover;
   }
 }
 
@@ -162,12 +162,12 @@ provide('currentGood', currentGood);
     padding: 15px;
     color: inherit;
     text-decoration: none;
-    box-shadow: 0 0 3px $black-shadow;
     cursor: pointer;
+    @include first-black-normal;
 
     &:hover {
-      color: $plum-main;
-      box-shadow: 0 0 1px $dark-shadow;
+      color: $plum-all-main;
+      @include first-black-down;
     }
   }
 }

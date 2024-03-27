@@ -1,0 +1,9 @@
+// Template: level-color-type
+
+@mixin first-black-normal {
+  box-shadow: 0 0 3px rgba(22, 19, 26, 0.45);
+}
+
+@mixin first-black-down {
+  box-shadow: 0 0 2px rgba(22, 19, 26, 0.30);
+}

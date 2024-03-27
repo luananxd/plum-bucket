@@ -14,6 +14,6 @@ const currentGood = inject('currentGood');
 
 .description {
   padding: 10px 15px;
-  box-shadow: 0 0 3px $black-shadow;
+  @include first-black-normal;
 }
 </style>

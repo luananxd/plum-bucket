@@ -25,7 +25,6 @@ const reviewsGrades = computed(() => {
 const getGradeAverageValue = (gradeName) => {
   return ((reviewsGrades.value.get(gradeName) / currentGoodReviews.length) || 0).toFixed(2);
 }
-
 </script>
 
 <template>
@@ -78,7 +77,7 @@ const getGradeAverageValue = (gradeName) => {
 .reviews {
   padding: 10px 15px;
   padding-bottom: 25px;
-  box-shadow: 0 0 3px $black-shadow;
+  @include first-black-normal;
 
   &__total {
     display: grid;
@@ -117,13 +116,13 @@ const getGradeAverageValue = (gradeName) => {
 
   &__line {
     display: block;
-    border: 2px solid $light-gray-text;
+    border: 2px solid $lightGray-text-aside;
   }
 
   &__progress {
     display: block;
     height: 100%;
-    background-color: $plum-main;
+    background-color: $plum-all-main;
   }
 }
 
@@ -160,7 +159,7 @@ const getGradeAverageValue = (gradeName) => {
     column-gap: 10px;
     margin: 0;
     padding: 0;
-    color: $gray-text;
+    color: $darkGray-text-aside;
     font-size: 14px;
     list-style-type: none;
   }

@@ -44,7 +44,7 @@
     text-align: center;
 
     & strong {
-      color: $plum-main;
+      color: $plum-all-main;
     }
   }
 }
@@ -53,7 +53,7 @@
   padding: 30px;
   padding-top: 80px;
   color: $white-text;
-  background-color: $plum-main;
+  background-color: $plum-all-main;
 
   &__list {
     display: grid;
