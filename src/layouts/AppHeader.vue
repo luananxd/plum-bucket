@@ -1,6 +1,9 @@
 <script setup>
 import { reactive } from 'vue';
+import { useRoute } from 'vue-router';
 import categoriesMap from '../common/maps/categories.json';
+
+const route = useRoute();
 
 const goodsCategories = reactive([
   'smartphones',
@@ -17,6 +20,9 @@ const goodsCategories = reactive([
         class="main-navigation__item"
         :class="{ 'main-navigation__item--active': route.fullPath.includes(category)}"
       >
+        <RouterLink class="main-navigation__link" :to="`/${category}`">
+          {{ categoriesMap[category] }}
+        </RouterLink>
       </li>
     </ul>
   </header>
