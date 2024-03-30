@@ -22,36 +22,13 @@ watch(() => route.params.category, (newValue) => {
   <section class="catalog">
     <h2 class="catalog__title">Категория: {{ categoriesMap[currentCategory] }}</h2>
     <ul class="catalog__list goods">
-      <li
-        class="goods__card"
+      <GoodCard
         v-for="good in currentCategoryGoods"
         :key="good.id"
+        :good="good"
+        :good-link="`/${route.params.category}/${good.id}`"
       >
-        <ul class="goods__promo promo">
-          <li v-for="promo in good.promos" class="promo__chips">
-            {{ promo }}
-          </li>
-        </ul>
-        <img
-          class="goods__image"
-          :src="`src/assets/img/goods${good.imagePath}`"
-          :alt="`${good.brand} ${good.model}`"
-          width="235"
-          height="235"
-        >
-        <div class="goods__info">
-          <RouterLink class="goods__link" :to="`/${route.params.category}/${good.id}/description`">
-            <h3 class="goods__title">{{ good.brand }} {{ good.model }}</h3>
-          </RouterLink>
-          <p class="goods__description">
-            {{ createGoodSmallDescription(good.specifications) }}
-          </p>
-          <div class="goods__order">
-            <button class="goods__button button" type="button">В корзину</button>
-            <strong>{{ createGoodPrice(good.price) }} ₽</strong>
-          </div>
-        </div>
-      </li>
+      </GoodCard>
     </ul>
   </section>
 </template>

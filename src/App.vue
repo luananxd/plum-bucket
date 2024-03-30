@@ -1,12 +1,12 @@
-<template>
-  <h1 class="app__title">Plum Bucket - магазин топовой электроники</h1>
-  <AppLayout></AppLayout>
-</template>
-
 <script setup>
 // Components
 import AppLayout from './layouts/AppLayout.vue';
 </script>
+
+<template>
+  <h1 class="app__title">Plum Bucket - магазин топовой электроники</h1>
+  <AppLayout></AppLayout>
+</template>
 
 <style>
 *,
