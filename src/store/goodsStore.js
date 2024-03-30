@@ -1,30 +1,51 @@
-import { reactive } from 'vue';
-import  { defineStore } from 'pinia';
+import { ref, computed, reactive } from 'vue';
+import { defineStore } from 'pinia';
+import { useReviewsStore } from './reviewsStore';
 
 import goodsJSON from '../common/data/goods.json';
-import reviewsJSON from '../common/data/reviews.json';
 
 export const useGoodsStore = defineStore('goodsStore', () => {
-  const allGoods = reactive(goodsJSON);
-  const allReviews = reactive(reviewsJSON);
+  const sortType = ref('По умолчанию');
+  const normalizeGoods = computed(() => {
+    const reviewsStore = useReviewsStore();
+    const goods = goodsJSON;
+    goods.forEach((good) => {
+      good.rate = reviewsStore.getTotalGrade(good.id);
+      good.reviewsCount = reviewsStore.getReviews(good.id).length
+    })
+    return goods;
+  });
+
+
+  
+  const getGood = (goodId) => {
+    return normalizeGoods.value.find((good) => good.id === goodId);
+  }
 
   const getCurrentCategoryGoods = (categoryName) => {
-    return allGoods.filter((good) => good.category === categoryName);
+    return normalizeGoods.value.filter((good) => good.category === categoryName);
   }
 
-  const getGood = (goodId) => {
-    return allGoods.find((good) => good.id === goodId);
-  }
-
-  const getReviews = (goodId) => {
-    return allReviews.filter((review) => review.goodId === goodId);
-  }
-
+  const sortFunction = computed(() => {
+    switch(sortType.value) {
+      case 'По возрастанию цены': 
+        return (a, b) => a.price - b.price;
+      case 'По убыванию цены': 
+        return (a, b) => b.price - a.price;
+      case 'Высокий рейтинг': 
+        return (a, b) => b.rate - a.rate;
+      case 'Много отзывов': 
+        return (a, b) => b.reviewsCount - a.reviewsCount;
+      default: 
+        return (a, b) => a.id - b.id;
+    }
+  })
 
   return {
-    allGoods,
-    getCurrentCategoryGoods,
+    normalizeGoods,
+    sortType,
+    sortFunction,
     getGood,
-    getReviews,
+    getCurrentCategoryGoods,
   }
 });
