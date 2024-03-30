@@ -1,13 +1,16 @@
 <script setup>
 import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import { useGoodsStore } from '../store/goodsStore';
-
+import GoodCard from '../components/parts/GoodCard.vue';
 import categoriesMap from '../common/maps/categories.json';
-import { createGoodSmallDescription, createGoodPrice } from '../common/helpers';
+import sortTypes from '../common/data/sort-types.json';
 
 const route = useRoute();
 const goodsStore = useGoodsStore();
+
+const { sortType } = storeToRefs(goodsStore);
 
 const currentCategory = ref(null);
 let currentCategoryGoods = [];
@@ -16,11 +19,22 @@ watch(() => route.params.category, (newValue) => {
   currentCategory.value = newValue;
   currentCategoryGoods = goodsStore.getCurrentCategoryGoods(currentCategory.value);
 }, {immediate: true});
+
+watch(() => sortType.value, (newValue) => {
+  currentCategoryGoods.sort(goodsStore.sortFunction);
+}, {immediate: true});
 </script>
 
 <template>
   <section class="catalog">
-    <h2 class="catalog__title">Категория: {{ categoriesMap[currentCategory] }}</h2>
+    <div class="catalog__header">
+      <h2 class="catalog__title">Категория: {{ categoriesMap[currentCategory] }}</h2>
+      <AppSelect
+        class="catalog__select"
+        :options="sortTypes"
+        v-model="sortType"
+      ></AppSelect>
+    </div>
     <ul class="catalog__list goods">
       <GoodCard
         v-for="good in currentCategoryGoods"
@@ -40,9 +54,19 @@ watch(() => route.params.category, (newValue) => {
   padding-top: 60px;
   padding-bottom: 60px;
 
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
   &__title {
     margin: 0;
-    margin-bottom: 40px;
+  }
+
+  &__select {
+    width: 220px;
   }
 }
 
@@ -53,84 +77,5 @@ watch(() => route.params.category, (newValue) => {
   margin: 0;
   padding: 0;
   list-style-type: none;
-
-  &__card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-color: $gray-background-main;
-    @include first-black-normal;
-  }
-
-  &__image {
-    height: 235px;
-    object-fit: contain;
-    background-color: $white-background-main;
-  }
-
-  &__info {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 2;
-    padding: 10px;
-  }
-
-  &__link {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  &__title {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-
-  &__description {
-    flex-grow: 2;
-    margin: 0;
-    margin-bottom: 15px;
-    color: $gray-text;
-    font-size: 14px;
-  }
-
-  &__order {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-}
-
-.promo {
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  display: flex;
-  gap: 5px;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-
-  &__chips {
-    display: inline-block;
-    padding: 3px 5px;
-    background-color: $red-chips-main;
-    color: $white-text-main;
-    font-size: 12px;
-    border-radius: 10px;
-  }
-}
-
-.button {
-  padding: 5px 10px;
-  background-color: $plum-all-main;
-  color: $white-text-main;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $plum-all-hover;
-  }
 }
 </style>

@@ -52,7 +52,7 @@
 .advantages {
   padding: 30px;
   padding-top: 80px;
-  color: $white-text;
+  color: $white-text-main;
   background-color: $plum-all-main;
 
   &__list {
