@@ -15,12 +15,12 @@ const routes = [
     children: [
       {
         path: 'description',
-        component: () => import('../components/blocks/GoodDescription.vue'),
+        component: () => import('../components/containers/GoodDescription.vue'),
         props: true,
       },
       {
         path: 'reviews',
-        component: () => import('../components/blocks/GoodReviews.vue'),
+        component: () => import('../components/containers/GoodReviews.vue'),
         props: true,
       },
     ],
