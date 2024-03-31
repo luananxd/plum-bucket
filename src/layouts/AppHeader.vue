@@ -14,17 +14,22 @@ const goodsCategories = reactive([
 
 <template>
   <header class="app-header">
-    <ul class="app-header__navigation main-navigation">
-      <li
-        v-for="category in goodsCategories"
-        class="main-navigation__item"
-        :class="{ 'main-navigation__item--active': route.fullPath.includes(category)}"
-      >
-        <RouterLink class="main-navigation__link" :to="`/${category}`">
-          {{ categoriesMap[category] }}
-        </RouterLink>
-      </li>
-    </ul>
+    <div class="app-header__wrapper">
+      <RouterLink class="app-header__home-link" to="/">
+        <img class="app-header__logo" src="../assets/img/icons/logo.svg" alt="Логотип Plum Bucket: две сливы в стиле минимализм" width="166" height="51">
+      </RouterLink>
+      <ul class="app-header__navigation main-navigation">
+        <li
+          v-for="category in goodsCategories"
+          class="main-navigation__item"
+          :class="{ 'main-navigation__item--active': route.fullPath.includes(category)}"
+        >
+          <RouterLink class="main-navigation__link" :to="`/${category}`">
+            {{ categoriesMap[category] }}
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
   </header>
 </template>
 
@@ -37,12 +42,23 @@ const goodsCategories = reactive([
   color: $white-text-main;
   font-size: 18px;
   font-weight: 700;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    width: 1000px;
+    margin: 0 auto;
+  }
+
+  &__home-link {
+    margin-right: 130px;
+  }
 }
 
 .main-navigation {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   list-style-type: none;
 
