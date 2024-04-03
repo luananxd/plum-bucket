@@ -52,6 +52,14 @@ const goodsCategories = reactive([
 
   &__home-link {
     margin-right: 130px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
   }
 }
 
@@ -69,14 +77,22 @@ const goodsCategories = reactive([
       background-color: $plum-all-hover;
     }
 
-    &--active::before {
+    &::before {
       content: '';
       position: absolute;
       left: 0;
       bottom: 0;
-      width: 100%;
       height: 5px;
       background-color: $white-text-main;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition-duration: 300ms;
+      transition-timing-function: ease-in;
+    }
+
+    &--active::before {
+      width: 100%;
+      transform: scaleX(1);
     }
   }
 

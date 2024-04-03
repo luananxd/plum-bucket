@@ -35,23 +35,25 @@ const closeSelectOutside = (event) => {
     ref="customSelect"
   >
     {{ model }}
-    <ul class="select__list" v-if="isOpen">
-      <li v-for="option in props.options">
-        <label
-          class="select__option"
-          :class="{ 'select__option--active': model === option }"
-        >
-          <input
-            class="visually-hidden"
-            type="radio"
-            :value="option"
-            v-model="model"
-            @change="isOpen = false"
+    <Transition>
+      <ul class="select__list" v-if="isOpen">
+        <li v-for="option in props.options">
+          <label
+            class="select__option"
+            :class="{ 'select__option--active': model === option }"
           >
-          <span class="select__text">{{ option }}</span>
-        </label>
-      </li>
-    </ul>
+            <input
+              class="visually-hidden"
+              type="radio"
+              :value="option"
+              v-model="model"
+              @change="isOpen = false"
+            >
+            <span class="select__text">{{ option }}</span>
+          </label>
+        </li>
+      </ul>
+    </Transition>
   </div>
 </template>
 
@@ -75,6 +77,8 @@ const closeSelectOutside = (event) => {
     height: 10px;
     background-image: url('../../assets/img/icons/select-arrow.svg');
     background-size: 100% 100%;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in;
   }
 
   &--open::after {
@@ -91,7 +95,7 @@ const closeSelectOutside = (event) => {
     padding: 0;
     width: 100%;
     max-height: 200px;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: $gray-background-main;
     list-style-type: none;
     @include first-black-normal;
@@ -107,5 +111,21 @@ const closeSelectOutside = (event) => {
       color: $white-text-main;
     }
   }
+}
+
+.v-enter-from,
+.v-leave-to {
+  max-height: 0;
+  overflow: hidden;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
+}
+
+.v-enter-to,
+.v-leave-from {
+  max-height: 200px;
+  overflow: hidden;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in;
 }
 </style>

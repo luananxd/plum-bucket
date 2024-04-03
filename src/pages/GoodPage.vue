@@ -41,7 +41,7 @@ provide('currentGood', currentGood);
           </div>
         </dl>
         <div class="good__order">
-          <button class="good__button button" type="button">В корзину</button>
+          <AppButton class="good__button" useStyles :font-size="18">В корзину</AppButton>
           <strong class="good__price">{{ createGoodPrice(currentGood.price) }} ₽</strong>
         </div>
       </div>
@@ -128,19 +128,6 @@ provide('currentGood', currentGood);
       color: $plum-all-main;
       font-weight: 700;
     }
-  }
-}
-
-.button {
-  padding: 5px 10px;
-  background-color: $plum-all-main;
-  color: $white-text-main;
-  font-size: 18px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: $plum-all-hover;
   }
 }
 

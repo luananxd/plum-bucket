@@ -20,13 +20,15 @@ const props = defineProps({
       {{ promo }}
     </li>
   </ul>
-  <img
-    class="good-card__image"
-    :src="`src/assets/img/goods${props.good.imagePath}`"
-    :alt="`${props.good.brand} ${props.good.model}`"
-    width="235"
-    height="235"
-  >
+  <RouterLink :to="`${props.goodLink}/description`">
+    <img
+      class="good-card__image"
+      :src="`src/assets/img/goods${props.good.imagePath}`"
+      :alt="`${props.good.brand} ${props.good.model}`"
+      width="235"
+      height="235"
+    >
+  </RouterLink>
   <div class="good-card__info">
     <div class="good-card__header">
       <RouterLink class="good-card__link" :to="`${props.goodLink}/description`">
@@ -40,7 +42,7 @@ const props = defineProps({
       {{ createGoodSmallDescription(props.good.specifications) }}
     </p>
     <div class="good-card__order">
-      <AppButton class="good-card__button" useStyles>В корзину</AppButton>
+      <AppButton class="good-card__button" useStyles :font-size="14">В корзину</AppButton>
       <strong>{{ createGoodPrice(props.good.price) }} ₽</strong>
     </div>
   </div>
@@ -84,6 +86,12 @@ const props = defineProps({
     position: relative;
     color: inherit;
     text-decoration: none;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+
+    &:hover {
+      color: $plum-all-hover;
+    }
 
     &::after {
       content: '';
@@ -102,6 +110,12 @@ const props = defineProps({
   &__link {
     color: inherit;
     text-decoration: none;
+    transition-duration: 200ms;
+    transition-timing-function: ease-out;
+
+    &:hover {
+      color: $plum-all-hover;
+    }
   }
 
   &__description {

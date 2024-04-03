@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useRoute } from 'vue-router';
 import { useGoodsStore } from '../store/goodsStore';
@@ -13,14 +13,15 @@ const goodsStore = useGoodsStore();
 const { sortType } = storeToRefs(goodsStore);
 
 const currentCategory = ref(null);
-let currentCategoryGoods = [];
+let currentCategoryGoods = reactive([]);
 
 watch(() => route.params.category, (newValue) => {
   currentCategory.value = newValue;
   currentCategoryGoods = goodsStore.getCurrentCategoryGoods(currentCategory.value);
+  sortType.value = 'По умолчанию';
 }, {immediate: true});
 
-watch(() => sortType.value, (newValue) => {
+watch(() => sortType.value, () => {
   currentCategoryGoods.sort(goodsStore.sortFunction);
 }, {immediate: true});
 </script>
@@ -35,15 +36,21 @@ watch(() => sortType.value, (newValue) => {
         v-model="sortType"
       ></AppSelect>
     </div>
-    <ul class="catalog__list goods">
+    <TransitionGroup
+      :key="route.params.category"
+      name="cards"
+      class="catalog__list goods"
+      tag="ul"
+      appear
+    >
       <GoodCard
         v-for="good in currentCategoryGoods"
-        :key="good.id"
+        :key="good.id + sortType.value"
         :good="good"
         :good-link="`/${route.params.category}/${good.id}`"
       >
       </GoodCard>
-    </ul>
+    </TransitionGroup>
   </section>
 </template>
 
@@ -77,5 +84,9 @@ watch(() => sortType.value, (newValue) => {
   margin: 0;
   padding: 0;
   list-style-type: none;
+}
+
+.cards-move {
+  transition-duration: 300ms;
 }
 </style>

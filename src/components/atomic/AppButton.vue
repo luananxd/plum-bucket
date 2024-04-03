@@ -1,12 +1,23 @@
 <script setup>
 const props = defineProps({
   useStyles: Boolean,
+  fontSize: {
+    required: false,
+    type: Number,
+  }
 })
 </script>
 
 <template>
-  <button type="button" :class="{ 'button': props.useStyles }">
-    <slot/>
+  <button
+    type="button"
+    :class="{ 'button': props.useStyles }"
+    :style="`font-size: ${props.fontSize}px`"
+  >
+    <span class="button__animate-back"></span>
+    <span class="button__text">
+      <slot/>
+    </span>
   </button>
 </template>
 
@@ -14,15 +25,32 @@ const props = defineProps({
 @import '../../assets/scss/style.scss';
 
 .button {
-  padding: 5px 10px;
+  position: relative;
+  display: block;
+  padding: 0.36em 0.71em;
   background-color: $plum-all-main;
   color: $white-text-main;
-  font-size: 14px;
   border: none;
   cursor: pointer;
 
-  &:hover {
-    background-color: $plum-all-hover;
+  &__animate-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: $lightBlue-all-accent;
+    transition-duration: 300ms;
+    transition-timing-function: ease-out;
+  }
+
+  &:hover .button__animate-back {
+    width: 100%;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 1;
   }
 }
 </style>
