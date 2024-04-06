@@ -48,6 +48,11 @@ const props = defineProps({
     width: 100%;
   }
 
+  &:active .button__animate-back {
+    background-color: $blue-all-accent;
+    transition-duration: 100ms;
+  }
+
   &__text {
     position: relative;
     z-index: 1;
