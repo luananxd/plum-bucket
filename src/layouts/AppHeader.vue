@@ -1,9 +1,11 @@
 <script setup>
 import { reactive } from 'vue';
 import { useRoute } from 'vue-router';
+import { useCartStore } from '../store/cartStore';
 import categoriesMap from '../common/maps/categories.json';
 
 const route = useRoute();
+const cartStore = useCartStore();
 
 const goodsCategories = reactive([
   'smartphones',
@@ -29,6 +31,10 @@ const goodsCategories = reactive([
           </RouterLink>
         </li>
       </ul>
+      <RouterLink class="app-header__cart cart" to="/cart">
+        <img class="cart__icon" src="../assets/img/icons/cart.svg" width="40" height="40"/>
+        <span class="cart__count">{{ cartStore.cart.length }}</span> 
+      </RouterLink>
     </div>
   </header>
 </template>
@@ -60,6 +66,10 @@ const goodsCategories = reactive([
     &:active {
       opacity: 0.5;
     }
+  }
+
+  &__cart {
+    margin-left: auto;
   }
 }
 
@@ -101,6 +111,21 @@ const goodsCategories = reactive([
     padding: 25px 25px;
     color: inherit;
     text-decoration: none;
+  }
+}
+
+.cart {
+  position: relative;
+  width: 40px;
+  color: $white-text-main;
+  text-decoration: none;
+
+  &__count {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
   }
 }
 </style>

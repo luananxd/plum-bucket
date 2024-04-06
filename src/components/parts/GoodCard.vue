@@ -1,6 +1,8 @@
 <script setup>
 import { createGoodSmallDescription, createGoodPrice } from '../../common/helpers';
+import { useCartStore } from '../../store/cartStore';
 
+const cartStore = useCartStore();
 const props = defineProps({
   good: {
     required: true,
@@ -10,7 +12,7 @@ const props = defineProps({
     required: true,
     type: String,
   }
-})
+});
 </script>
 
 <template>
@@ -42,7 +44,12 @@ const props = defineProps({
       {{ createGoodSmallDescription(props.good.specifications) }}
     </p>
     <div class="good-card__order">
-      <AppButton class="good-card__button" useStyles :font-size="14">В корзину</AppButton>
+      <AppButton
+        class="good-card__button" 
+        useStyles
+        :font-size="14"
+        @click="cartStore.getGoodToCart(props.good)"
+      >В корзину</AppButton>
       <strong>{{ createGoodPrice(props.good.price) }} ₽</strong>
     </div>
   </div>

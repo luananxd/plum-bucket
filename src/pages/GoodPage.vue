@@ -2,11 +2,13 @@
 import { ref, reactive, provide } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useGoodsStore } from '../store/goodsStore';
+import { useCartStore } from '../store/cartStore';
 import { createGoodPrice } from '../common/helpers';
 
 const route = useRoute();
 const router = useRouter();
 const goodsStore = useGoodsStore();
+const cartStore = useCartStore();
 
 const goodId = ref(route.params.goodId);
 const goodTabs = reactive([
@@ -18,10 +20,6 @@ const goodTabs = reactive([
     link: 'reviews',
     title: 'Отзывы'
   },
-  // {
-  //   link: 'questions',
-  //   title: 'Вопросы по товару'
-  // },
 ]);
 
 const currentGood = goodsStore.getGood(goodId.value);
@@ -41,7 +39,12 @@ provide('currentGood', currentGood);
           </div>
         </dl>
         <div class="good__order">
-          <AppButton class="good__button" useStyles :font-size="18">В корзину</AppButton>
+          <AppButton
+            class="good__button"
+            useStyles
+            :font-size="18"
+            @click="cartStore.getGoodToCart(currentGood)"
+          >В корзину</AppButton>
           <strong class="good__price">{{ createGoodPrice(currentGood.price) }} ₽</strong>
         </div>
       </div>
